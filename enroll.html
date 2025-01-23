@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll at Philvard University</title>
+    <link rel="stylesheet" href="css/enroll.css"> <!-- Link to external CSS -->
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #credentials {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enrollment Form</h1>
+        <form id="enrollmentForm">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" required>
+
+            <label for="middleName">Middle Name:</label>
+            <input type="text" id="middleName" required>
+
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" required>
+
+            <label for="motherName">Mother's Name:</label>
+            <input type="text" id="motherName" required>
+
+            <label for="fatherName">Father's Name:</label>
+            <input type="text" id="fatherName" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" required>
+
+            <label for="course">Course:</label>
+            <select id="course" required>
+                <option value="BSIT">BSIT</option>
+                <option value="BSCS">BSCS</option>
+                <option value="BSBA">BSBA</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="credentials">
+            <h2>Congratulations, <span id="userFullName"></span>! You are now enrolled at Philvard University.</h2>
+            <p>Username: <span id="generatedUsername"></span></p>
+            <p>Password: <span id="generatedPassword"></span></p>
+            <p>Please keep your credentials safe.</p>
+            <a href="index.html">Go to Home</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("enrollmentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const course = document.getElementById("course").value;
+
+            // Generate random username and password
+            const username = firstName + course + Math.floor(Math.random() * 10000);
+            const password = firstName + Math.floor(Math.random() * 10000);
+
+            // Store data in localStorage
+            localStorage.setItem("username", username);
+            localStorage.setItem("password", password);
+
+            // Display credentials
+            document.getElementById("userFullName").innerText = firstName + " " + lastName;
+            document.getElementById("generatedUsername").innerText = username;
+            document.getElementById("generatedPassword").innerText = password;
+
+            // Hide form and show credentials
+            document.getElementById("enrollmentForm").style.display = "none";
+            document.getElementById("credentials").style.display = "block";
+        });
+    </script>
+</body>
+</html>
